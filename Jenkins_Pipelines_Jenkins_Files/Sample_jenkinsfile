@@ -11,7 +11,7 @@ pipeline {
                 script {
                     checkout([$class: 'GitSCM', 
                     branches: [[name: '*/main']], 
-                    extensions: [[$class: 'CleanBeforeCheckout']], 
+                    extensions: [[$class: 'CleanBeforeCheckout'], [$class: 'CleanCheckout']], 
                     userRemoteConfigs: [[url: 'https://github.com/vktrock/Jenkins_Upgradev3.git']]])
                 }
             }
