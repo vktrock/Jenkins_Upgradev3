@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    environment {
+        MY_ENV_VAR = 'Custom Value'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    checkout([$class: 'GitSCM', 
+                        branches: [[name: '*/master']],
+                        userRemoteConfigs: [[url: 'https://github.com/vktrock/Jenkins_Upgradev3.git']]]),
+                        extensions: [[$class: 'CleanBeforeCheckout']]
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh '''
+                    ls
+                    echo "In Build Step"
+                '''
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'echo "In Test Step"'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'echo "Value of ENV Variable is "$MY_ENV_VAR""'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline Succeesed!'
+        }
+        failure {
+            echo 'Pipeline Failed!'
+        }
+    }
+
+}
