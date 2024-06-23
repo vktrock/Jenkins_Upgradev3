@@ -10,9 +10,9 @@ pipeline {
             steps {
                 script {
                     checkout([$class: 'GitSCM', 
-                        branches: [[name: '*/master']],
-                        userRemoteConfigs: [[url: 'https://github.com/vktrock/Jenkins_Upgradev3.git']],
-                        extensions: [[$class: 'CleanBeforeCheckout']]
+                    branches: [[name: '*/main']], 
+                    extensions: [[$class: 'CleanBeforeCheckout']], 
+                    userRemoteConfigs: [[url: 'https://github.com/vktrock/Jenkins_Upgradev3.git']]])
                 }
             }
         }
